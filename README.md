@@ -74,5 +74,44 @@ Alice's Zano Address,
 TimeLock for BTC, 
 Timelock for Zano 
 
-
+Typical run of script looks like that: 
+```
+Secrete.hash: dba33feaed1e37a8e15f12caa122122bb034bbdf246f64f0a4e50578929b440c
+[prepare_htlc_watchonly_address] BTC watch-only wallet created:
+[prepare_htlc_watchonly_address]: Prepared with BTC P2SH address:
+ 2NGBpJkpmbPANbRGD4oSNhgkZZJQFpABJ7r
+[ALICE]: CREATING HTLC IN BTC NTEWORK FOR BOB....
+[createHTLC]: BTC P2SH address:
+ 2NGBpJkpmbPANbRGD4oSNhgkZZJQFpABJ7r
+BTC funding TX sent:
+ 8745f5364619d73b954319e1d6257e53c843877d05e1b044852a4f948e47edf3
+[ALICE]: CREATED, txid:"8745f5364619d73b954319e1d6257e53c843877d05e1b044852a4f948e47edf3"
+[BOB]: CHECKING BTC HTLC CONFIRMED....
+[check_htlc_proposed]: Detected transaction: 8745f5364619d73b954319e1d6257e53c843877d05e1b044852a4f948e47edf3
+[check_htlc_proposed]: Detected funding output: 0
+[BOB]: CONFIRMED(8745f5364619d73b954319e1d6257e53c843877d05e1b044852a4f948e47edf3)
+[BOB]: CREATING HTLC IN ZANO NTEWORK FOR ALICE.....
+[BOB]: CREATED, txid: "0f1c2600ef8656a48db809062a1080f41eb395a33cef66fd56f2e271ff57e357"
+[ALICE]: CHECKING ZANO HTLC CONFIRMED....
+Sleeping...0
+.......
+Sleeping...45
+[ALICE]: CONFIRMED: txid0f1c2600ef8656a48db809062a1080f41eb395a33cef66fd56f2e271ff57e357
+[ALICE]: REDEEM ZANO HTLC...
+[ALICE]: REDEEM RESULT: txidb8a8ecf857b9c50b4956bf7fdceeb0917e8404d2818fe7b07a955c7a90c2aaae
+[BOB]: CHECK IS ZANO HTLC REDEEMED....
+Sleeping...0
+......
+Sleeping...48
+[BOB]: CHECK IS ZANO HTLC REDEEMED. txid: b8a8ecf857b9c50b4956bf7fdceeb0917e8404d2818fe7b07a955c7a90c2aaae
+[BOB]: REDEEMING BTC HTLC.....
+(node:17068) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[redeem_htlc] BTC: swap-sweep address:
+ mymfyer7a1EWgwZNy4NLo2Wthv48wN5PW3
+[redeem_htlc] BTC: swap-sweep TX:
+ 1e1a670e4369ab08caf0809b9dbe2f6a5bcb07c50e2dd41b01414539de960b4d
+BTC broadcasting swepp TX:  {success: true}
+[BOB]: DONE
+```
 
