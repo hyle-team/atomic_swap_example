@@ -65,14 +65,15 @@ bcoin-cli --http-port=18032 --api-key=api-key info
 
 Alice has Bitcoin and wants Zano. Bob has Zano and wants Bitcoin. 
 Both parties presented ad two instances of class SwapBundle. 
-Before actuall(simulated) deal Alice and Bob negotiated and agreed on conditions, and sharing between each other following information: 
-Amount of BTC traded, 
-Amount of Zano traded, 
-Bob's Bitcoin PublicKey, 
-Alice's Bitcoin PublicKey, 
-Alice's Zano Address,
-TimeLock for BTC, 
-Timelock for Zano 
+Before actuall(simulated) deal Alice and Bob negotiated and agreed on conditions, and sharing between each other following information:
+* Alice's Secret hash 
+* Amount of BTC traded, 
+* Amount of Zano traded, 
+* Bob's Bitcoin PublicKey, 
+* Alice's Bitcoin PublicKey, 
+* Alice's Zano Address,
+* TimeLock for BTC, 
+* Timelock for Zano 
 
 Typical run of script looks like that: 
 ```
