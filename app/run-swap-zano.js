@@ -137,6 +137,8 @@ async function perform_swap()
   }  
   console.log("[BOB]: DONE");
   
+  console.log("SWAP SUCCESSFULLY DONE");
+
   process.exit(1);
 }
 
@@ -159,7 +161,7 @@ async function perform_swap_zano_first()
   //in this scenario we don't need to generate secrete as a separate step, 
   //Zano walet will generate this secret automatically in a deterministic way
   console.log("[BOB]: CREATING HTLC IN ZANO NTEWORK FOR ALICE.....");
-  const bob_send_htlc_res = await partyBob.zano.send_htlc(await partyAlice.zano.get_address(), amount_zano, swap_time_zano, "");
+  const bob_send_htlc_res = await partyBob.zano.send_htlc(await partyAlice.zano.get_address(), amount_zano, swap_time_zano, "0000000000000000000000000000000000000000000000000000000000000000");
   console.log("[BOB]: CREATED, \n"
         + "txid: " + bob_send_htlc_res.result.result_tx_id + "\n"
         + "generated_origin(secret): " + bob_send_htlc_res.result.derived_origin_secret_as_hex
@@ -232,8 +234,8 @@ async function perform_swap_zano_first()
 
 
   console.log("[ALICE]: CHECKING BTC HTLC REDEEMED....");
-  var sleep_count = 0;
-  let check_res = undefined;
+  sleep_count = 0;
+  check_res = undefined;
   while(true)
   {
     check_res = await partyAlice.btc.check_htlc_redeemed();
@@ -244,61 +246,18 @@ async function perform_swap_zano_first()
     
     console.log("Sleeping..." + sleep_count);
     sleep_count += 1;
-    await sleep(1000);
+    await sleep(10000);
   }
-  console.log("[BOB]: CONFIRMED(" + check_res.txid.toString('hex') + ")");
+  console.log("[Alice]: HTLC REDEEMED(" + check_res.txid.toString('hex') + ", secrete: " + check_res.secret.toString('hex') + ")");
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
   console.log("[ALICE]: REDEEM ZANO HTLC...");
-  const alice_redeem_res = await partyAlice.zano.redeem_htlc(alice_check_res.info.tx_id, alice_secret.secret);
+  const alice_redeem_res = await partyAlice.zano.redeem_htlc(alice_check_res.info.tx_id, check_res.secret);
   console.log("[ALICE]: REDEEM RESULT: txid" + alice_redeem_res.result.result_tx_id);
-  
 
-  console.log("[BOB]: CHECK IS ZANO HTLC REDEEMED....");
-  let bob_check_redeemed_res = undefined;
-  sleep_count = 0;
-  while(true)
-  {
-    bob_check_redeemed_res = await partyBob.zano.check_htlc_redeemed(bob_send_htlc_res.result.result_tx_id); 
-    if(bob_check_redeemed_res.result !== undefined 
-       && bob_check_redeemed_res.result.origin_secrete_as_hex !== undefined
-       && bob_check_redeemed_res.result.origin_secrete_as_hex !== ''
-       )
-    {
-      break;
-    }
-
-    console.log("Sleeping..." + sleep_count);
-    sleep_count += 1;
-    await sleep(1000);
-  }
-  console.log("[BOB]: CHECK IS ZANO HTLC REDEEMED. txid: " + bob_check_redeemed_res.result.redeem_tx_id);
-
+  console.log("SWAP SUCCESSFULLY DONE");
   
   process.exit(1);
 }
 
 
-perform_swap();
+perform_swap_zano_first();
