@@ -24,6 +24,17 @@ npm install -g bcoin
 ...and that the [NODE_PATH](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders)
 environment variable is set.
 
+It's also assumed that the user has Zano installed and runned locally, and two Zano wallets launched on corresponding ports: [Alice's wallet on port 12335](https://github.com/hyle-team/atomic_swap_example/blob/07549b8158627fb0eb2ee0dd907caa9324b45383/app/run-swap-zano.js#L40) and [Bob's wallet on port 12334](https://github.com/hyle-team/atomic_swap_example/blob/07549b8158627fb0eb2ee0dd907caa9324b45383/app/run-swap-zano.js#L40)
+See Zano [repo](https://github.com/hyle-team/zano) for more detailed instructions. Wallet launch should look like that: 
+
+```
+# generate new wallet
+simplewallet --generate-new-wallet=test2.zan --password=12345
+
+# launch wallet in server mode
+simplewallet --wallet-file=test2.zan --password=12345 --rpc-bind-port=12335
+```
+
 ## Configuration
 
 Example `.conf` files are provided for all four servers (node/wallet, bcoin).
